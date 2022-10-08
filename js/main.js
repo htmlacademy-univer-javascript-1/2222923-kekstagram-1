@@ -50,7 +50,7 @@ const commentsArray = (count) => {
     });
   }
   return array;
-}
+};
 
 const addPhotos = () => {
   for (let i = 0; i < COUNT_OBJECTS; i++){
