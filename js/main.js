@@ -1,4 +1,3 @@
-const checkStringLength = (str, max) => str.lenght <= max;
+import {addPhotos} from './data.js';
 
-import {arrayObjects} from './data.js';
-console.log(arrayObjects);
+addPhotos();

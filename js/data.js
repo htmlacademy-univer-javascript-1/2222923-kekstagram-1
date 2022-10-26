@@ -1,3 +1,5 @@
+import { getRandomInt, getRandomElementFromArray, identificationGenerator } from './util.js';
+
 const COUNT_OBJECTS = 25;
 
 const NAMES = [
@@ -23,45 +25,25 @@ const DESCRIPTIONS = [
   'Очередная ванильная фразочка из интернета'
 ];
 
-const arrayObjects = [];
+const commentIdGenerator = identificationGenerator();
+const photoIdGenerator = identificationGenerator();
+const urlIdGenerator = identificationGenerator();
 
-const getRandomInt = (min, max) => {
-  if (min < 0 || max < 0) {
-    return -1;
-  }
+const commentsArray = () => ({
+  id: commentIdGenerator(),
+  avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
+  message: getRandomElementFromArray(MESSAGES),
+  name: getRandomElementFromArray(NAMES)
+});
 
-  if (min > max) {
-    [min, max] = [max, min];
-  }
+const addPhoto = () => ({
+  id: photoIdGenerator(),
+  url: `photos/${urlIdGenerator()}.jpg`,
+  description: getRandomElementFromArray(DESCRIPTIONS),
+  likes: getRandomInt(15, 200),
+  comments: Array.from({ length: getRandomInt(0, 2)}, commentsArray)
+});
 
-  return Math.floor(Math.random() * (max + 1 - min) + min);
-};
+const addPhotos = () => Array.from({ length: COUNT_OBJECTS }, addPhoto);
 
-const commentsArray = (count) => {
-  const array = [];
-  for (let i = 0; i < count; i++){
-    array.push({
-      id: i,
-      avatar: `img/avatar-${getRandomInt(1,6)}.svg`,
-      message: MESSAGES[getRandomInt(0, MESSAGES.length - 1)],
-      name: NAMES[getRandomInt(0, NAMES.length - 1)]
-    });
-  }
-  return array;
-};
-
-const addPhotos = () => {
-  for (let i = 0; i < COUNT_OBJECTS; i++){
-    arrayObjects.push({
-      id: i,
-      url: `photos/${i+1}.jpg`,
-      description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.lenght - 1)],
-      likes: getRandomInt(15, 200),
-      comments: commentsArray(getRandomInt(0, 2))
-    });
-  }
-};
-
-addPhotos();
-
-export {arrayObjects};
+export {addPhotos};
