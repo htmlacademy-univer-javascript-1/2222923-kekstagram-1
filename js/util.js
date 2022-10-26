@@ -14,10 +14,18 @@ const getRandomElementFromArray = (array) => array[getRandomInt(0, array.length 
 
 const checkStringLength = (str, max) => str.length <= max;
 
+const isEscapeKey = (event) => event.key === 'Escape';
+
 const identificationGenerator = () => {
   let identification = 0;
 
   return () => ++identification;
 };
 
-export {getRandomInt, checkStringLength, getRandomElementFromArray, identificationGenerator};
+export {
+  getRandomInt,
+  checkStringLength,
+  getRandomElementFromArray,
+  identificationGenerator,
+  isEscapeKey
+};
