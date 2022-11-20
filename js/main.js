@@ -1,4 +1,5 @@
 import {addPhotos} from './data.js';
-import {addThumbnails} from './thumbnails.js';
+import {createThumbnails} from './thumbnails.js';
+import './form.js';
 
-addThumbnails(addPhotos());
+createThumbnails(addPhotos());
