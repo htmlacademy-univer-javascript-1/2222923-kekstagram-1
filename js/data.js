@@ -41,7 +41,7 @@ const addPhoto = () => ({
   url: `photos/${urlIdGenerator()}.jpg`,
   description: getRandomElementFromArray(DESCRIPTIONS),
   likes: getRandomInt(15, 200),
-  comments: Array.from({ length: getRandomInt(0, 2)}, commentsArray)
+  comments: Array.from({ length: getRandomInt(1, 20)}, commentsArray)
 });
 
 const addPhotos = () => Array.from({ length: COUNT_OBJECTS }, addPhoto);
