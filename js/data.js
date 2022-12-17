@@ -1,15 +1,13 @@
-import { getRandomInt, getRandomElementFromArray, identificationGenerator } from './util.js';
+import {uniqueNumberGenerator, getRandomPositiveInteger, getRandomElementFromArray} from './util.js';
 
-const COUNT_OBJECTS = 25;
-
-const NAMES = [
-  'Ванесса Хаг',
-  'Новак Джокович',
-  'Стив Джобс',
-  'Вальтер Скотт'
+const PHOTO_DESCRIPTIONS = [
+  'Эйфелева башня невероятно красива, да и мы около неё стоим не менее красивые',
+  'Эта башня невероятно наклонена и не падает много лет, но я делаю вид, что держу её',
+  'Здание на фотографии имеет причудливую форму медного цвета. Мог ли это быть офис компании?',
+  'Оказался в центре Лондона: люди, двухэтажные автобусы, машины. Красиво тут, в Казани...'
 ];
 
-const MESSAGES = [
+const COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -18,32 +16,35 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const DESCRIPTIONS = [
-  'Описание потом придумаю',
-  'Фото сделал - описание не сделал',
-  'Как придумать описание к фото, если нет фантазии? :/',
-  'Очередная ванильная фразочка из интернета'
+const NAMES = [
+  'Дарина', 'Богдан', 'Борислав', 'Владислав',
+  'Милорад', 'Радислав', 'Святослав', 'Вениамин',
+  'Мефодий', 'Митрофан', 'Никодим', 'Добрыня',
+  'Мефодий', 'Савва', 'Аврора', 'Евдокия'
 ];
 
-const commentIdGenerator = identificationGenerator();
-const photoIdGenerator = identificationGenerator();
-const urlIdGenerator = identificationGenerator();
+const PHOTO_NUMBER = 25;
 
-const commentsArray = () => ({
+const commentIdGenerator = uniqueNumberGenerator();
+const imageIdGenerator = uniqueNumberGenerator();
+const photoNumberGenerator = uniqueNumberGenerator();
+
+const createComment = () => ({
   id: commentIdGenerator(),
-  avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
-  message: getRandomElementFromArray(MESSAGES),
+  avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+  message: getRandomElementFromArray(COMMENTS),
   name: getRandomElementFromArray(NAMES)
 });
 
-const addPhoto = () => ({
-  id: photoIdGenerator(),
-  url: `photos/${urlIdGenerator()}.jpg`,
-  description: getRandomElementFromArray(DESCRIPTIONS),
-  likes: getRandomInt(15, 200),
-  comments: Array.from({ length: getRandomInt(0, 2)}, commentsArray)
+const createImage = () => ({
+  id: imageIdGenerator(),
+  url: `photos/${photoNumberGenerator()}.jpg`,
+  description: getRandomElementFromArray(PHOTO_DESCRIPTIONS),
+  likes: getRandomPositiveInteger(15, 200),
+  comments: Array.from({length: getRandomPositiveInteger(1, 12)}, createComment)
 });
 
-const addPhotos = () => Array.from({ length: COUNT_OBJECTS }, addPhoto);
+const createImages = () => Array.from({length: PHOTO_NUMBER}, createImage);
 
-export {addPhotos};
+export {createImages};
+
