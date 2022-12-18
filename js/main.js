@@ -1,13 +1,16 @@
-import './util.js';
-
+import {debounce} from './util.js';
 import {createThumbnails} from './thumbnails.js';
 import {setUserFormSubmit, closeUploadFileForm} from './form.js';
 import {getData} from './api.js';
-import './pictures.js';
+import './big-pictures.js';
 import {showError, showSuccess} from './alerts.js';
+import {setFilter, showFilters, TIMEOUT_DELAY} from './filters.js';
 
-
-getData(createThumbnails);
+getData((data) => {
+  createThumbnails(data);
+  showFilters();
+  setFilter(debounce((filterData) => createThumbnails(filterData(data)), TIMEOUT_DELAY));
+});
 
 setUserFormSubmit(() => {
   closeUploadFileForm();
