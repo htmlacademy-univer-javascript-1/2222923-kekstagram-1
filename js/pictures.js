@@ -72,6 +72,9 @@ const openModal = (image) => {
   commentsLoader.addEventListener('click', () => {
     commentsNumber += MAX_COMMENT_NUMBER;
     showCommentsCount(image, commentsNumber);
+    if (commentsNumber > commentsCount.textContent){
+      commentsNumber = MAX_COMMENT_NUMBER;
+    }
   });
 
   bigPicture.classList.remove('hidden');
@@ -90,4 +93,4 @@ const thumbnailClickHandler = (data) => {
   });
 };
 
-export {thumbnailClickHandler};
+export {thumbnailClickHandler, closeModal};

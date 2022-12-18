@@ -1,5 +1,18 @@
-import {addPhotos} from './data.js';
-import {createThumbnails} from './thumbnails.js';
-import './form.js';
+import './util.js';
 
-createThumbnails(addPhotos());
+import {createThumbnails} from './thumbnails.js';
+import {setUserFormSubmit, closeUploadFileForm} from './form.js';
+import {getData} from './api.js';
+import './pictures.js';
+import {showError, showSuccess} from './alerts.js';
+
+
+getData(createThumbnails);
+
+setUserFormSubmit(() => {
+  closeUploadFileForm();
+  showSuccess();
+}, () => {
+  closeUploadFileForm(null, false);
+  showError();
+});

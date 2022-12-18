@@ -1,4 +1,4 @@
-import {thumbnailClickHandler} from './pictures.js';
+import {thumbnailClickHandler} from './big-pictures.js';
 
 const template = document.querySelector('#picture').content;
 const documentFragment = document.createDocumentFragment();
