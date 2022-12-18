@@ -1,5 +1,5 @@
 const generateOptions = (min, max, start, step) => ({
-  range: {min, max},
+  range: { min, max },
   start,
   step,
   connect: 'lower'
@@ -23,7 +23,7 @@ const sliderStyles = {
   'heat': (value) => `brightness(${value})`
 };
 
-const getSmartSlider = (filter, levelSlider, levelValue) => {
+const smartSlider = (filter, levelSlider, levelValue) => {
   let currentFilter = filter;
 
   const hiddenIfFilterIsNone = () => {
@@ -55,5 +55,5 @@ const getSmartSlider = (filter, levelSlider, levelValue) => {
 };
 
 export {
-  getSmartSlider
+  smartSlider
 };
